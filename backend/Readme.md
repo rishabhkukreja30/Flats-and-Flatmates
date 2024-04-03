@@ -1,0 +1,1 @@
+# Backend for flats and flatmates application built using enode, express and mongodb
