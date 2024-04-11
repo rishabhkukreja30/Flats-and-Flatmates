@@ -11,4 +11,10 @@ const registerBody = zod.object({
   wishList: zod.array(zod.string()).optional()
 });
 
-export { registerBody };
+const loginBody = zod.object({
+  username: zod.string().max(30).min(3).optional(),
+  email: zod.string().email().optional(),
+  password: zod.string().min(6),
+});
+
+export { registerBody, loginBody };
