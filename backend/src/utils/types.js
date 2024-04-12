@@ -17,4 +17,19 @@ const loginBody = zod.object({
   password: zod.string().min(6),
 });
 
-export { registerBody, loginBody };
+const flatListing = zod.object({
+  title: zod.string().min(1),
+  description: zod.string().min(1).optional(),
+  flatType: zod.enum(["1BHK", "2BHK", "3BHK", "4BHK+"]),
+  city: zod.string().min(1),
+  area: zod.string().min(1),
+  location: zod.string().min(1),
+  roomRent: zod.string(),  // update to number later
+  flatRent: zod.string(),  // update to number later
+  preferance: zod.enum(["Male", "Female", "None"]),
+  availableFrom: zod.string(),
+  amenities: zod.array(zod.string()).optional(),
+  flatImages: zod.array(zod.string()).optional(),
+})
+
+export { registerBody, loginBody, flatListing };

@@ -12,8 +12,10 @@ app.use(cookieParser());
 
 // routes
 import userRouter from "./routes/user.routes.js";
+import flatRouter from "./routes/flat.routes.js";
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/flats", flatRouter);
 
 app.get("/hello", (req, res) =>{
     res.send("hello Rishabh")

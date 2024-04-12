@@ -15,6 +15,14 @@ const flatSchema = new Schema(
       enum: ["1BHK", "2BHK", "3BHK", "4BHK+"],
       required: true,
     },
+    city :{
+      type: String,
+      required: true,
+    },
+    area: {
+      type: String,
+      required: true,
+    },
     location: {
       type: String,
       required: true,
@@ -29,7 +37,7 @@ const flatSchema = new Schema(
     },
     preferance: {
       type: String,
-      enum: ["Male", "Female", "Both"],
+      enum: ["Male", "Female", "None"],
       required: true,
     },
     availableFrom: {
