@@ -63,7 +63,27 @@ const getAllFlats = async (req, res) => {
     );
 }
 
+const getFlatById = async (req, res) => {
+    const flat = await Flat.findById(req.params.id);
+    if (!flat) {
+        throw new ApiError(500, "Cannot find this flat")
+    }
+    return res.status(200).json(
+        new ApiResponse(200, flat, "Flat retrieved succesfully"),
+    );
+}
+
+const deleteFlat = async (req, res) => {
+    const flat = await Flat.findByIdAndDelete(req.params.id);
+    if (!flat) {
+        throw new ApiError(500, "Cannot delete this flat")
+    }
+    return res.status(200).json(
+        new ApiResponse(200, {}, "Flat deleted succesfully"),
+    );  
+}
 
 
 
-export {getAllFlats, addFlatListing}
+
+export {getAllFlats, addFlatListing, getFlatById, deleteFlat}
