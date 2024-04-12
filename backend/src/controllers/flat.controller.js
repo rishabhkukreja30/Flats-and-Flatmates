@@ -7,7 +7,7 @@ import { flatListing } from "../utils/types.js";
 
 const addFlatListing = async (req, res) => {
     // take flat input from the user
-    const {title ,description, flatType, city, area, location, roomRent, flatRent, preferance, availableFrom} = req.body;
+    const {title ,description, flatType, city, area, location, roomRent, flatRent, preferance, availableFrom, amenities} = req.body;
     // validate the inputs
     const { success } = flatListing.safeParse(req.body);
     if (!success) {
@@ -38,6 +38,8 @@ const addFlatListing = async (req, res) => {
         flatRent,
         preferance,
         availableFrom,
+        postedBy: req.user._id,
+        amenities,
         flatImages
     })
 
@@ -52,7 +54,13 @@ const addFlatListing = async (req, res) => {
 }
 
 const getAllFlats = async (req, res) => {
-    res.send("hello world")
+    const flats = await Flat.find();
+    if (!flats) {
+        throw new ApiError(500, "Something went wrong while retrieving the flats")
+    }
+    return res.status(200).json(
+        new ApiResponse(200, flats, "Flats retrieved succesfully"),
+    );
 }
 
 
