@@ -5,6 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { flatListing } from "../utils/types.js";
 import { asyncHandler } from "../utils/asyncHnadler.js";
+import { User } from "../models/user.model.js";
 
 
 const addFlatListing = asyncHandler (async (req, res) => {
@@ -54,6 +55,9 @@ const addFlatListing = asyncHandler (async (req, res) => {
     );
 
 })
+
+
+
 
 const getAllFlats = asyncHandler (async (req, res) => {
     const flats = await Flat.find();

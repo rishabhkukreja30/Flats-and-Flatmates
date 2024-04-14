@@ -15,5 +15,4 @@ router.route("/search").get(searchFlats);
 router.route("/:id").get(getFlatById).delete(verifyJwt, deleteFlat);
 
 
-
 export default router;
