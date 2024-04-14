@@ -1,11 +1,13 @@
+import { query } from "express";
 import { Flat } from "../models/flat.model.js";
 import { ApiError } from "../utils/ApiErrror.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { flatListing } from "../utils/types.js";
+import { asyncHandler } from "../utils/asyncHnadler.js";
 
 
-const addFlatListing = async (req, res) => {
+const addFlatListing = asyncHandler (async (req, res) => {
     // take flat input from the user
     const {title ,description, flatType, city, area, location, roomRent, flatRent, preferance, availableFrom, amenities} = req.body;
     // validate the inputs
@@ -51,9 +53,9 @@ const addFlatListing = async (req, res) => {
         new ApiResponse(201, {}, "Flat created succesfully"),
     );
 
-}
+})
 
-const getAllFlats = async (req, res) => {
+const getAllFlats = asyncHandler (async (req, res) => {
     const flats = await Flat.find();
     if (!flats) {
         throw new ApiError(500, "Something went wrong while retrieving the flats")
@@ -61,9 +63,9 @@ const getAllFlats = async (req, res) => {
     return res.status(200).json(
         new ApiResponse(200, flats, "Flats retrieved succesfully"),
     );
-}
+})
 
-const getFlatById = async (req, res) => {
+const getFlatById = asyncHandler (async (req, res) => {
     const flat = await Flat.findById(req.params.id);
     if (!flat) {
         throw new ApiError(500, "Cannot find this flat")
@@ -71,9 +73,9 @@ const getFlatById = async (req, res) => {
     return res.status(200).json(
         new ApiResponse(200, flat, "Flat retrieved succesfully"),
     );
-}
+})
 
-const deleteFlat = async (req, res) => {
+const deleteFlat = asyncHandler (async (req, res) => {
     const flat = await Flat.findByIdAndDelete(req.params.id);
     if (!flat) {
         throw new ApiError(500, "Cannot delete this flat")
@@ -81,9 +83,34 @@ const deleteFlat = async (req, res) => {
     return res.status(200).json(
         new ApiResponse(200, {}, "Flat deleted succesfully"),
     );  
-}
+})
+
+// search flats
+const searchFlats =  asyncHandler (async (req ,res) => {
+    const {city ,area ,flatType} = req.query;
+    // Build the query object based on the provided search parameters
+    const query = {};
+
+    if(city) query.city = city;
+    if(area) query.area = area;
+    if(flatType) query.flatType = flatType;
+
+    const flats = await Flat.find(query);
+    if (!flats) {
+        throw new ApiError(500, "Something went wrong while retrieving the flats")
+    }
+    if(flats.length === 0) {
+        return res.status(200).json(
+            new ApiResponse(200, {}, "No flats found")
+        )
+    }
+
+    return res.status(200).json(
+        new ApiResponse(200, flats, "Flats retrieved succesfully"),
+    );
+})
 
 
 
 
-export {getAllFlats, addFlatListing, getFlatById, deleteFlat}
+export {getAllFlats, addFlatListing, getFlatById, deleteFlat, searchFlats}

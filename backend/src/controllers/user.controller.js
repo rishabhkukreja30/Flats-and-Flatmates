@@ -3,8 +3,9 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiError } from "../utils/ApiErrror.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHnadler.js";
 
-const registerUser = async (req, res) => {
+const registerUser = asyncHandler (async (req, res) => {
   //get input from the user/frontend
   //validate the inputs
   const { success } = registerBody.safeParse(req.body);
@@ -52,9 +53,9 @@ const registerUser = async (req, res) => {
   return res.status(201).json(
     new ApiResponse(201, createdUser, "User registered succesfully"),
   );
-};
+});
 
-const loginUser = async(req, res) => {
+const loginUser = asyncHandler(async(req, res) => {
   // take input from user in req.body
   const { success } = loginBody.safeParse(req.body);
   if (!success) {
@@ -93,9 +94,9 @@ const loginUser = async(req, res) => {
   .cookie("token", token, options)
   .json(new ApiResponse(200, {user: username, token}, "User logged in successfully"))
 
-}
+})
 
-const logoutUser = async(req, res) => {
+const logoutUser =   asyncHandler (async(req, res) => {
   const options = {
     httpOnly: true,
     secure: true
@@ -104,6 +105,6 @@ const logoutUser = async(req, res) => {
   return res.status(200)
   .clearCookie("token", options)
   .json(new ApiResponse(200, {}, "User logged out successfully"))
-}
+})
 
 export { registerUser, loginUser, logoutUser };
