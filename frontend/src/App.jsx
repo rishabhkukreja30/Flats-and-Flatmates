@@ -4,13 +4,11 @@ import Header from "./components/Header";
 
 const App = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div>
       <Header />
-      <main className="flex-grow">
+      <main>
         <Outlet />
-        <div className="h-90 bg-black"></div>
       </main>
-
       <Footer />
     </div>
   );

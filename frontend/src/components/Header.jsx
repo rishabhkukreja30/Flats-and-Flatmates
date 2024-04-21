@@ -14,18 +14,14 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-gray-950 shadow-md shadow-indigo-700 z-20">
-        <nav className="flex justify-between items-center w-full py-4 px-7">
+      <header className="bg-gray-950 border-b-2 border-indigo-700 ">
+        <nav className="flex justify-between  py-4 px-7">
           <Link to="/">
             <Logo />
           </Link>
           <div className="flex items-center">
             <Link to="/signin">
-              <Button
-                className="hidden md:block"
-                bgColor="bg-indigo-700"
-                children={"SignIn"}
-              />
+              <Button className="hidden md:block" children={"SignIn"} />
             </Link>
             <button onClick={toggleMobileMenu}>
               <FontAwesomeIcon
@@ -37,10 +33,20 @@ const Header = () => {
         </nav>
       </header>
       {isMobileMenuOpen && (
-        <div className="bg-gray-950 py-4 px-7">
+        <div className="bg-gray-950 py-4 px-7 md:hidden">
           <Link to="/signin">
-            <Button bgColor="bg-indigo-700">SignIn</Button>
+            <div className="w-full m-1 hover:bg-indigo-700 p-2 text-2xl text-white rounded-md ">
+              SignIn
+            </div>
+            {/* <Button children={"SignIn"} /> */}
           </Link>
+          <Link to="/signin">
+            <div className="w-full m-1 hover:bg-indigo-700 p-2 text-2xl text-white rounded-md ">
+              SignIn
+            </div>
+            {/* <Button children={"SignIn"} /> */}
+          </Link>
+
           {/* Add more menu items here if needed */}
         </div>
       )}

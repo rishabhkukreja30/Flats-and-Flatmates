@@ -2,9 +2,8 @@ import React from "react";
 
 const SignIn = () => {
   return (
-    <div className="w-50 h-50 bg-green-400 absolute text-white">
-      dbwbhwbfhfbhbfh2bf
-      <input className="bg-red-500 text-white" placeholder="nmame"></input>
+    <div className="bg-slate-900 min-h-screen flex justify-center items-center">
+      <div className="absolute bg-gray-950 h-2/3 w-1/2 opacity-50"></div>
     </div>
   );
 };
