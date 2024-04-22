@@ -36,7 +36,7 @@ const Header = () => {
       {isMobileMenuOpen && (
         <div className="bg-gray-950 py-4 px-7 md:hidden">
           <Link to="/signin">
-            <div className=" m-1 hover:bg-indigo-700 p-2 text-2xl text-white rounded-md ">
+            <div className="flex m-1 hover:bg-indigo-700 p-2 text-2xl justify-center text-white rounded-lg border-2 border-white">
               SignIn
             </div>
           </Link>
