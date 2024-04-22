@@ -5,11 +5,13 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignIn from "./pages/SignIn.jsx";
 import Home from "./pages/Home.jsx";
+import Error from "./components/Error.jsx";
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",

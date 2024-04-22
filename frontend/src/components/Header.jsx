@@ -23,6 +23,7 @@ const Header = () => {
             <Link to="/signin">
               <Button className="hidden md:block" children={"SignIn"} />
             </Link>
+
             <button onClick={toggleMobileMenu}>
               <FontAwesomeIcon
                 icon={isMobileMenuOpen ? faTimes : faBars}
@@ -35,16 +36,9 @@ const Header = () => {
       {isMobileMenuOpen && (
         <div className="bg-gray-950 py-4 px-7 md:hidden">
           <Link to="/signin">
-            <div className="w-full m-1 hover:bg-indigo-700 p-2 text-2xl text-white rounded-md ">
+            <div className=" m-1 hover:bg-indigo-700 p-2 text-2xl text-white rounded-md ">
               SignIn
             </div>
-            {/* <Button children={"SignIn"} /> */}
-          </Link>
-          <Link to="/signin">
-            <div className="w-full m-1 hover:bg-indigo-700 p-2 text-2xl text-white rounded-md ">
-              SignIn
-            </div>
-            {/* <Button children={"SignIn"} /> */}
           </Link>
 
           {/* Add more menu items here if needed */}
