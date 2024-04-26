@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import SignIn from "./pages/SignIn.jsx";
 import Home from "./pages/Home.jsx";
 import Error from "./components/Error.jsx";
+import FlatsListing from "./pages/FlatsListing.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/signup",
         element: <SignIn />,
+      },
+      {
+        path: "/flats",
+        element: <FlatsListing />,
       },
     ],
   },
