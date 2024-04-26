@@ -13,7 +13,10 @@ export const flats = [
     postedBy: "Rishabh",
     amenities: "sofa, bed, chair",
     flatImages: [
+      "https://cdn.confident-group.com/wp-content/uploads/2023/07/20093309/Elevation-slider-fairfield.jpg",
       "https://images.nobroker.in/images/ff808181548fae60015493e85ac42a99/ff808181548fae60015493e85ac42a99_49012_656652_medium.jpg",
+      "https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1647506927/Website/CMS-Uploads/aqxnv6kurdiziavjxsjh.jpg",
+      "https://www.apartmentguide.com/blog/wp-content/uploads/2019/10/flat_hero.jpg",
     ],
     deposit: 80000,
     furnishing: "Full",

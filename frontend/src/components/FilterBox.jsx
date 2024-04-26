@@ -3,7 +3,7 @@ import Button from "./Button";
 
 const FilterBox = () => {
   return (
-    <div className=" hidden md:block bg-gray-950 w-3/12 h-fit text-white border-2 border-white rounded-xl shadow-2xl shadow-indigo-700">
+    <div className="hidden md:block bg-gray-950 w-3/12 h-fit text-white border-2 border-white rounded-xl shadow-2xl mr-10 shadow-indigo-700">
       <div className="font-medium text-2xl bg-indigo-700 hover:bg-indigo-500 py-2 m-6 rounded-xl border-2 border-white text-center cursor-pointer">
         <h1>FILTERS</h1>
       </div>
