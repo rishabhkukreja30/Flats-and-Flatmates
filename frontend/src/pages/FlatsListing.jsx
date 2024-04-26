@@ -5,9 +5,9 @@ import FilterBox from "../components/FilterBox";
 
 const FlatsListing = () => {
   return (
-    <div className=" bg-slate-900 p-10 flex justify-between">
+    <div className=" bg-slate-900 p-10 flex justify-center md:justify-between">
       <FilterBox />
-      <div className="w-9/12 ml-10">
+      <div className="md:w-9/12 md:ml-10">
         {flats.map((flat, index) => (
           <FlatCard key={index} flat={flat} />
         ))}
