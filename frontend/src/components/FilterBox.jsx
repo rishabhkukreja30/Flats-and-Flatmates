@@ -7,6 +7,40 @@ const FilterBox = () => {
       <div className="font-medium text-2xl bg-indigo-700 hover:bg-indigo-500 py-2 m-6 rounded-xl border-2 border-white text-center cursor-pointer">
         <h1>FILTERS</h1>
       </div>
+      <h1 className="font-medium text-xl py-2 mx-6 ">City</h1>
+      <div className="flex flex-wrap jutsify-between mx-6 text-gray-400">
+        <div className="py-2  mx-6 font-medium text-xl ">
+          <input
+            type="radio"
+            id="Bengaluru"
+            name="city"
+            className="h-4 w-4 mr-2"
+          />
+          <label for="Immediate">Bengaluru</label>
+        </div>
+        <div className="py-2 mx-6 font-medium text-xl ">
+          <input
+            type="radio"
+            id="Hyderabad"
+            name="city"
+            className="h-4 w-4 mr-2"
+          />
+          <label for="Within 15 Days">Hyderabad</label>
+        </div>
+        <div className="py-2 mx-6 font-medium text-xl ">
+          <input
+            type="radio"
+            id="Gurugram"
+            name="city"
+            className="h-4 w-4 mr-2"
+          />
+          <label for="3BWithin 30 DaysHK">Gurugram</label>
+        </div>
+        <div className="py-2 mx-6 font-medium text-xl ">
+          <input type="radio" id="Noida" name="city" className="h-4 w-4 mr-2" />
+          <label for="After 30 Days">Noida</label>
+        </div>
+      </div>
       <h1 className="font-medium text-xl py-2 mt-3 mx-6 ">BHK Type</h1>
       <div className="flex flex-wrap jutsify-between mx-6 text-gray-400">
         <div className="py-2  mx-6 font-medium text-xl ">
