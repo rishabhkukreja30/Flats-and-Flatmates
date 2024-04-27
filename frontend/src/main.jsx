@@ -7,6 +7,7 @@ import SignIn from "./pages/SignIn.jsx";
 import Home from "./pages/Home.jsx";
 import Error from "./components/Error.jsx";
 import FlatsListing from "./pages/FlatsListing.jsx";
+import FlatDetails from "./pages/FlatDetails.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/flats",
         element: <FlatsListing />,
+      },
+      {
+        path: "/flats/:id",
+        element: <FlatDetails />,
       },
     ],
   },
