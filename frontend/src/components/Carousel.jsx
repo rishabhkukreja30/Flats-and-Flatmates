@@ -7,7 +7,7 @@ const Carousel = ({ flatImages }) => {
     const interval = setInterval(() => {
       const newIndex = (currentIndex + 1) % flatImages.length;
       setCurrentIndex(newIndex);
-    }, 2000); // Change interval duration as needed (in milliseconds)
+    }, 3000); // Change interval duration as needed (in milliseconds)
 
     return () => clearInterval(interval);
   }, [currentIndex, flatImages.length]);
