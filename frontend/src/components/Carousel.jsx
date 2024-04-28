@@ -1,7 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Carousel = ({ flatImages }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newIndex = (currentIndex + 1) % flatImages.length;
+      setCurrentIndex(newIndex);
+    }, 2000); // Change interval duration as needed (in milliseconds)
+
+    return () => clearInterval(interval);
+  }, [currentIndex, flatImages.length]);
 
   const prevSlide = () => {
     const newIndex = (currentIndex - 1 + flatImages.length) % flatImages.length;
