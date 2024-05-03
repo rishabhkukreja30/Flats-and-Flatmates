@@ -23,7 +23,7 @@ const Header = () => {
       active: !authStatus,
     },
     {
-      name: "SignUp",
+      name: "Sign Up",
       url: "/signup",
       active: !authStatus,
     },
@@ -56,6 +56,11 @@ const Header = () => {
                 </li>
               ) : null
             )}
+            {authStatus && (
+              <li>
+                <Button className="hidden md:block" children={"Logout"} />
+              </li>
+            )}
 
             <button onClick={toggleMobileMenu}>
               <FontAwesomeIcon
@@ -71,7 +76,7 @@ const Header = () => {
           {navItems.map((item) =>
             item.active ? (
               <Link to={item.url}>
-                <div className="flex m-1 hover:bg-indigo-700 p-2 text-2xl justify-center text-white rounded-lg border-2 border-white">
+                <div className="flex my-4 mx-2 hover:bg-indigo-700 p-2 text-2xl justify-center text-white rounded-lg border-2 border-white">
                   {item.name}
                 </div>
               </Link>
