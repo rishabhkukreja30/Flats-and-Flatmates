@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "./Carousel";
 import { flats } from "../FlatData";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
@@ -53,6 +53,10 @@ const FlatCard = () => {
               <h2 className=" text-gray-400 font-medium">City</h2>
             </div>
           </div>
+          <FontAwesomeIcon
+            icon={faShareNodes}
+            className="w-8 h-8 p-5 float-right"
+          />
         </div>
       </Link>
     </div>

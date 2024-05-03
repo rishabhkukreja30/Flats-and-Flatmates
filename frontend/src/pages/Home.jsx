@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className="bg-slate-900 p-5">
       <div className="flex justify-center text-center text-white">
-        <h1 className="font-bold text-3xl p-5 border-b-4 border-indigo-700 shadow-lg shadow-indigo-700 rounded-xl">
+        <h1 className="font-bold text-3xl p-5 border-b-4 border-white shadow-lg shadow-indigo-700 rounded-xl">
           Welcome to <span className="text-indigo-700">Flats N Flatmates</span>
         </h1>
       </div>

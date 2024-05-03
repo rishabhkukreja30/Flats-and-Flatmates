@@ -9,6 +9,9 @@ import Error from "./components/Error.jsx";
 import FlatsListing from "./pages/FlatsListing.jsx";
 import FlatDetails from "./pages/FlatDetails.jsx";
 import PostFlat from "./pages/PostFlat.jsx";
+import WishList from "./pages/WishList.jsx";
+import { Provider } from "react-redux";
+import store from "./store/store.js";
 
 const appRouter = createBrowserRouter([
   {
@@ -29,6 +32,14 @@ const appRouter = createBrowserRouter([
         element: <SignIn />,
       },
       {
+        path: "/wishlist",
+        element: <WishList />,
+      },
+      {
+        path: "/listings",
+        element: <WishList />,
+      },
+      {
         path: "/flats",
         element: <FlatsListing />,
       },
@@ -46,8 +57,10 @@ const appRouter = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={appRouter}>
-      <App />
-    </RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={appRouter}>
+        <App />
+      </RouterProvider>
+    </Provider>
   </React.StrictMode>
 );

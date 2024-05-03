@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Logo from "./Logo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to track mobile menu open/close
@@ -12,6 +13,32 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle the state
   };
 
+  const authStatus = useSelector((state) => state.auth.status);
+  const navigate = useNavigate();
+
+  const navItems = [
+    {
+      name: "SignIn",
+      url: "/signin",
+      active: !authStatus,
+    },
+    {
+      name: "SignUp",
+      url: "/signup",
+      active: !authStatus,
+    },
+    {
+      name: "WishList",
+      url: "/wishlist",
+      active: !authStatus,
+    },
+    {
+      name: "Listings",
+      url: "/listings",
+      active: !authStatus,
+    },
+  ];
+
   return (
     <>
       <header className="bg-gray-950 border-b-2 border-indigo-700 ">
@@ -19,10 +46,16 @@ const Header = () => {
           <Link to="/">
             <Logo />
           </Link>
-          <div className="flex items-center">
-            <Link to="/signin">
-              <Button className="hidden md:block" children={"SignIn"} />
-            </Link>
+          <ul className="flex items-center">
+            {navItems.map((item) =>
+              item.active ? (
+                <li key={item.name}>
+                  <Link to={item.url}>
+                    <Button className="hidden md:block" children={item.name} />
+                  </Link>
+                </li>
+              ) : null
+            )}
 
             <button onClick={toggleMobileMenu}>
               <FontAwesomeIcon
@@ -30,18 +63,20 @@ const Header = () => {
                 className="md:hidden text-indigo-700 h-7 w-7"
               />
             </button>
-          </div>
+          </ul>
         </nav>
       </header>
       {isMobileMenuOpen && (
         <div className="bg-gray-950 py-4 px-7 md:hidden">
-          <Link to="/signin">
-            <div className="flex m-1 hover:bg-indigo-700 p-2 text-2xl justify-center text-white rounded-lg border-2 border-white">
-              SignIn
-            </div>
-          </Link>
-
-          {/* Add more menu items here if needed */}
+          {navItems.map((item) =>
+            item.active ? (
+              <Link to={item.url}>
+                <div className="flex m-1 hover:bg-indigo-700 p-2 text-2xl justify-center text-white rounded-lg border-2 border-white">
+                  {item.name}
+                </div>
+              </Link>
+            ) : null
+          )}
         </div>
       )}
     </>
