@@ -30,12 +30,12 @@ const Header = () => {
     {
       name: "WishList",
       url: "/wishlist",
-      active: !authStatus,
+      active: authStatus,
     },
     {
-      name: "Listings",
+      name: "Your Listings",
       url: "/listings",
-      active: !authStatus,
+      active: authStatus,
     },
   ];
 

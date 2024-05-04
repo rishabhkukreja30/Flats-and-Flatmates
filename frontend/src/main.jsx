@@ -12,6 +12,7 @@ import PostFlat from "./pages/PostFlat.jsx";
 import WishList from "./pages/WishList.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
+import SignUp from "./pages/SignUp.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/signup",
-        element: <SignIn />,
+        element: <SignUp />,
       },
       {
         path: "/wishlist",
