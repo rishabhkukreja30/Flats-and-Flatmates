@@ -6,9 +6,9 @@ const registerBody = zod.object({
   password: zod.string().min(6),
   fullName: zod.string().max(50),
   phoneNumber: zod.string().min(10).max(10),
-  profilePicture: zod.string().optional(),
+  // profilePicture: zod.string().optional(),
   listings: zod.array(zod.string()).optional(),
-  wishList: zod.array(zod.string()).optional()
+  wishList: zod.array(zod.string()).optional(),
 });
 
 const loginBody = zod.object({
@@ -24,12 +24,12 @@ const flatListing = zod.object({
   city: zod.string().min(1),
   area: zod.string().min(1),
   location: zod.string().min(1),
-  roomRent: zod.string(),  // update to number later
-  flatRent: zod.string(),  // update to number later
+  roomRent: zod.string(), // update to number later
+  flatRent: zod.string(), // update to number later
   preferance: zod.enum(["Male", "Female", "None"]),
   availableFrom: zod.string(),
   amenities: zod.array(zod.string()).optional(),
   flatImages: zod.array(zod.string()).optional(),
-})
+});
 
 export { registerBody, loginBody, flatListing };

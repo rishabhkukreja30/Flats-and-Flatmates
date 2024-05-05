@@ -4,7 +4,8 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faLock, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
-import { checkValidateData } from "../utils/validate";
+import { checkSigninData } from "../utils/validate";
+import axios from "axios";
 
 const SignIn = () => {
   const email = useRef(null);
@@ -12,15 +13,31 @@ const SignIn = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // validate the form data
-    const message = checkValidateData(
+    const message = checkSigninData(
       email.current.value,
       password.current.value
     );
     setErrorMessage(message);
-    // send backend request to /login
+
+    if (message) return;
+
+    // send backend request to /login to sign in he user
+    try {
+      const res = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/users/login`,
+        {
+          email: email.current.value,
+          password: password.current.value,
+        }
+      );
+    } catch (error) {
+      setErrorMessage("Unable to Login");
+    }
+
+    console.log(res.data);
   };
 
   return (
@@ -36,14 +53,14 @@ const SignIn = () => {
           className="w-full flex flex-col items-center "
           onSubmit={(e) => handleSubmit(e)}
         >
-          <Input inputRef={email} placeholder="Enter Username" icon={faUser} />
+          <Input inputRef={email} placeholder="Enter Email" icon={faUser} />
           <Input
             inputRef={password}
             placeholder="Password"
             type="password"
             icon={faLock}
           />
-          <p className="text-red-500 font-bold text-lg">{errorMessage}</p>
+          <p className="text-red-500 font-mdium text-xl">{errorMessage}</p>
           <Button children={"Login"} className="mt-4" type="submit" />
         </form>
         <p className="my-4">
