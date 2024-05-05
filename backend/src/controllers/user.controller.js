@@ -71,6 +71,10 @@ const loginUser = asyncHandler(async (req, res) => {
     $or: [{ username }, { email }],
   });
 
+  const userDetails = await User.findById(user._id).select(
+    "_id username email phoneNumber listings wishList"
+  );
+
   if (!user) {
     throw new ApiError(400, "User with this email or username does not exist");
   }
@@ -85,9 +89,8 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // make sure cookies can only be edited by th server and not the browser
   const options = {
-    httpOnly: false,
-    // secure: true,
-    withCredentials: true,
+    httpOnly: true,
+    secure: true,
   };
 
   return res
@@ -96,7 +99,7 @@ const loginUser = asyncHandler(async (req, res) => {
     .json(
       new ApiResponse(
         200,
-        { user: username, token },
+        { userDetails, token },
         "User logged in successfully"
       )
     );
