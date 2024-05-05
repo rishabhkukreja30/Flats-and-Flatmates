@@ -44,7 +44,7 @@ const SignUp = () => {
           phoneNumber: phoneNumber.current.value,
         }
       );
-      console.log(res);
+      console.log(res.data);
     } catch (error) {
       setErrorMessage("Unable to Sign Up");
     }

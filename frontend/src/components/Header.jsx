@@ -13,29 +13,29 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen); // Toggle the state
   };
 
-  const authStatus = useSelector((state) => state.auth.status);
+  const loginStatus = useSelector((state) => state.user.status);
   const navigate = useNavigate();
 
   const navItems = [
     {
       name: "SignIn",
       url: "/signin",
-      active: !authStatus,
+      active: !loginStatus,
     },
     {
       name: "Sign Up",
       url: "/signup",
-      active: !authStatus,
+      active: !loginStatus,
     },
     {
       name: "WishList",
       url: "/wishlist",
-      active: authStatus,
+      active: loginStatus,
     },
     {
       name: "Your Listings",
       url: "/listings",
-      active: authStatus,
+      active: loginStatus,
     },
   ];
 
@@ -56,7 +56,7 @@ const Header = () => {
                 </li>
               ) : null
             )}
-            {authStatus && (
+            {loginStatus && (
               <li>
                 <Button className="hidden md:block" children={"Logout"} />
               </li>

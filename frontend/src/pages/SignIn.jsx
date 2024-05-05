@@ -3,15 +3,18 @@ import Input from "../components/Input";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faLock, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkSigninData } from "../utils/validate";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/userSlice";
 
 const SignIn = () => {
   const email = useRef(null);
   const password = useRef(null);
-
   const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,18 +29,20 @@ const SignIn = () => {
 
     // send backend request to /login to sign in he user
     try {
-      const res = await axios.post(
+      const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/users/login`,
         {
           email: email.current.value,
           password: password.current.value,
         }
       );
+      if (data) {
+        dispatch(addUser(data.data.userDetails));
+        navigate("/");
+      }
     } catch (error) {
       setErrorMessage("Unable to Login");
     }
-
-    console.log(res.data);
   };
 
   return (
