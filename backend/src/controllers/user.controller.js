@@ -112,7 +112,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // make sure cookies can only be edited by th server and not the browser
   const options = {
     httpOnly: true,
-    secure: true,
+    secure: false,
   };
 
   return res
@@ -130,7 +130,7 @@ const loginUser = asyncHandler(async (req, res) => {
 const logoutUser = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
-    secure: true,
+    secure: false,
   };
 
   return res

@@ -34,11 +34,15 @@ const SignIn = () => {
         {
           email: email.current.value,
           password: password.current.value,
-        }
+        },
+        { withCredentials: true }
       );
-      if (data) {
+      console.log(data);
+      if (data && data.success) {
         dispatch(addUser(data.data.userDetails));
         navigate("/");
+      } else if (data && !data.success) {
+        setErrorMessage(data.message);
       }
     } catch (error) {
       setErrorMessage("Unable to Login");

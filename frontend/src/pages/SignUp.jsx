@@ -1,11 +1,13 @@
 import React, { useRef, useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faLock, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faEnvelope, faUser } from "@fortawesome/free-regular-svg-icons";
 import { checkSignupData } from "../utils/validate";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/userSlice";
 
 const SignUp = () => {
   const email = useRef(null);
@@ -14,6 +16,8 @@ const SignUp = () => {
   const username = useRef(null);
   const phoneNumber = useRef(null);
   const fullName = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -34,7 +38,7 @@ const SignUp = () => {
 
     // send backend request to /login to sign in he user
     try {
-      const res = await axios.post(
+      const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/users/register`,
         {
           username: username.current.value,
@@ -44,9 +48,16 @@ const SignUp = () => {
           phoneNumber: phoneNumber.current.value,
         }
       );
-      console.log(res.data);
+      console.log(data);
+      if (data && data.success) {
+        dispatch(addUser(data.data));
+        navigate("/");
+      } else if (data && !data.success) {
+        setErrorMessage(data.message);
+      }
     } catch (error) {
       setErrorMessage("Unable to Sign Up");
+      console.error(error);
     }
 
     // console.log(res.data);

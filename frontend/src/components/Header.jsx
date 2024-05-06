@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../store/userSlice";
+import axios from "axios";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to track mobile menu open/close
@@ -15,6 +17,7 @@ const Header = () => {
 
   const loginStatus = useSelector((state) => state.user.status);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const navItems = [
     {
@@ -39,6 +42,23 @@ const Header = () => {
     },
   ];
 
+  const handleLogout = async () => {
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/users/logout`,
+        {}, // passing empty object as second argument in post request is data
+        { withCredentials: true }
+      );
+      console.log(data);
+      if (data && data.success) {
+        dispatch(removeUser());
+        navigate("/signin");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <header className="bg-gray-950 border-b-2 border-indigo-700 ">
@@ -58,7 +78,11 @@ const Header = () => {
             )}
             {loginStatus && (
               <li>
-                <Button className="hidden md:block" children={"Logout"} />
+                <Button
+                  onClick={handleLogout}
+                  className="hidden md:block"
+                  children={"Logout"}
+                />
               </li>
             )}
 
