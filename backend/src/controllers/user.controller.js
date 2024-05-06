@@ -10,7 +10,9 @@ const registerUser = asyncHandler(async (req, res) => {
   //validate the inputs
   const { success } = registerBody.safeParse(req.body);
   if (!success) {
-    throw new ApiError(400, "Invalid credentials");
+    return res
+      .status(200)
+      .json(new ApiResponse(400, {}, "Invalid Credentilas"));
   }
 
   //   check if user already exists
@@ -21,7 +23,15 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (existingUser) {
-    throw new ApiError(400, "User with this email or username already exists");
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          400,
+          {},
+          "User with this email or username already exists"
+        )
+      );
   }
 
   // console.log(req.file.path);
@@ -46,7 +56,11 @@ const registerUser = asyncHandler(async (req, res) => {
   const createdUser = await User.findById(user._id).select("-password");
 
   if (!createdUser) {
-    throw new ApiError(500, "Something went wrong while creating the user");
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(500, {}, "Something went wrong while creating the user")
+      );
   }
 
   return res
@@ -58,7 +72,9 @@ const loginUser = asyncHandler(async (req, res) => {
   // take input from user in req.body
   const { success } = loginBody.safeParse(req.body);
   if (!success) {
-    throw new ApiError(400, "Invalid credentials");
+    return res
+      .status(200)
+      .json(new ApiResponse(400, {}, "Invalid Credentials"));
   }
 
   const { username, email, password } = req.body;
@@ -71,17 +87,23 @@ const loginUser = asyncHandler(async (req, res) => {
     $or: [{ username }, { email }],
   });
 
-  const userDetails = await User.findById(user._id).select(
-    "_id username email phoneNumber listings wishList"
-  );
-
   if (!user) {
-    throw new ApiError(400, "User with this email or username does not exist");
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          400,
+          {},
+          "User with this email or username does not exist"
+        )
+      );
   }
+
+  const userDetails = await User.findById(user._id).select("-password");
 
   const isPasswordValid = await user.isPasswordCorrect(password);
   if (!isPasswordValid) {
-    throw new ApiError(400, "Incorrect Password");
+    return res.status(200).json(new ApiResponse(400, {}, "Incorrect Password"));
   }
 
   // generate the token and set the token in cookies
