@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "../components/Input";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faLock, faEnvelope, faPhone } from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { checkSigninData } from "../utils/validate";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../store/userSlice";
 
 const SignIn = () => {
@@ -15,6 +15,13 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loginStatus = useSelector((state) => state.user.status);
+
+  useEffect(() => {
+    if (loginStatus) {
+      navigate("/");
+    }
+  }, [loginStatus, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -13,6 +13,7 @@ import WishList from "./pages/WishList.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import SignUp from "./pages/SignUp.jsx";
+import AuthLayout from "./components/AuthLayout.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -26,7 +27,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/signin",
-        element: <SignIn />,
+        element: (
+          <AuthLayout>
+            <SignIn />
+          </AuthLayout>
+        ),
       },
       {
         path: "/signup",
@@ -34,11 +39,19 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/wishlist",
-        element: <WishList />,
+        element: (
+          <AuthLayout path={"/wishlist"}>
+            <WishList />
+          </AuthLayout>
+        ),
       },
       {
         path: "/listings",
-        element: <WishList />,
+        element: (
+          <AuthLayout>
+            <WishList />
+          </AuthLayout>
+        ),
       },
       {
         path: "/flats",

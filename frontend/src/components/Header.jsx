@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "./Logo";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "./Button";
@@ -105,6 +105,14 @@ const Header = () => {
                 </div>
               </Link>
             ) : null
+          )}
+          {loginStatus && ( // Adding logout button for logged-in users
+            <div
+              onClick={handleLogout}
+              className="flex my-4 mx-2 hover:bg-indigo-700 p-2 text-2xl justify-center text-white rounded-lg border-2 border-white"
+            >
+              Logout
+            </div>
           )}
         </div>
       )}
