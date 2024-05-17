@@ -17,12 +17,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   const loginStatus = useSelector((state) => state.user.status);
 
-  useEffect(() => {
-    if (loginStatus) {
-      navigate("/");
-    }
-  }, [loginStatus, navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     // validate the form data
@@ -44,7 +38,7 @@ const SignIn = () => {
         },
         { withCredentials: true }
       );
-      console.log(data);
+      // console.log(data);
       if (data && data.success) {
         dispatch(addUser(data.data.userDetails));
         navigate("/");

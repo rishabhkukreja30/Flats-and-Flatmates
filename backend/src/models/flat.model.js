@@ -16,7 +16,7 @@ const flatSchema = new Schema(
       enum: ["1BHK", "2BHK", "3BHK", "4BHK+"],
       required: true,
     },
-    city :{
+    city: {
       type: String,
       required: true,
     },
@@ -49,11 +49,14 @@ const flatSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    amenities: [
-      {
-        type: String,
-      },
-    ],
+    deposit: {
+      type: Number,
+      required: true,
+    },
+    furnishing: {
+      type: String,
+      required: true,
+    },
     flatImages: [{ type: String }],
   },
   { timestamps: true }
@@ -61,18 +64,17 @@ const flatSchema = new Schema(
 
 flatSchema.post("save", async function (flat) {
   try {
-      // Find the user associated with the flat
-      const user = await User.findById(flat.postedBy);
+    // Find the user associated with the flat
+    const user = await User.findById(flat.postedBy);
 
-      // If user is found, add the flat to their listings
-      if (user) {
-        user.listings.push(flat._id); // Assuming listings is an array of flat IDs
-        await user.save({validateBeforeSave: false}); // Save the updated user model
-      }
-    
+    // If user is found, add the flat to their listings
+    if (user) {
+      user.listings.push(flat._id); // Assuming listings is an array of flat IDs
+      await user.save({ validateBeforeSave: false }); // Save the updated user model
+    }
   } catch (error) {
-    console.error('Error updating user listings:', error);
+    console.error("Error updating user listings:", error);
   }
-})
+});
 
 export const Flat = mongoose.model("Flat", flatSchema);

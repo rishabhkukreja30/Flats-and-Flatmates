@@ -5,7 +5,7 @@ import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { removeUser } from "../store/userSlice";
+import { addUser, removeUser } from "../store/userSlice";
 import axios from "axios";
 
 const Header = () => {
@@ -18,6 +18,26 @@ const Header = () => {
   const loginStatus = useSelector((state) => state.user.status);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const fetchUser = async () => {
+    try {
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/users/current-user`,
+        { withCredentials: true }
+      );
+      console.log(data);
+      if (data && data.success) {
+        dispatch(addUser(data.data));
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const navItems = [
     {

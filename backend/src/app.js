@@ -22,8 +22,4 @@ import flatRouter from "./routes/flat.routes.js";
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/flats", flatRouter);
 
-app.get("/hello", (req, res) => {
-  res.send("hello Rishabh");
-});
-
 export { app };
