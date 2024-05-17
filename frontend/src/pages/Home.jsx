@@ -55,7 +55,7 @@ const Home = () => {
               Have a flat to rent out? List it here and connect with potential
               tenants.
             </p>
-            <Link to="/flats">
+            <Link to="/flats/postflat">
               <Button children={"Add Your Flat"} />
             </Link>
           </div>

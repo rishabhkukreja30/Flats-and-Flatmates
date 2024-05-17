@@ -8,7 +8,6 @@ const AuthLayout = ({ path, children }) => {
   const loginStatus = useSelector((state) => state.user.status);
 
   useEffect(() => {
-    console.log(loginStatus);
     if (loginStatus === true) {
       navigate({ path });
     } else if (loginStatus === false) {

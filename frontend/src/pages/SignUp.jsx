@@ -48,7 +48,6 @@ const SignUp = () => {
           phoneNumber: phoneNumber.current.value,
         }
       );
-      console.log(data);
       if (data && data.success) {
         dispatch(addUser(data.data));
         navigate("/");
@@ -59,8 +58,6 @@ const SignUp = () => {
       setErrorMessage("Unable to Sign Up");
       console.error(error);
     }
-
-    // console.log(res.data);
   };
 
   return (

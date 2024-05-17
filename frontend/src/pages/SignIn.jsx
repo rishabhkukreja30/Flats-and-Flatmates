@@ -38,7 +38,6 @@ const SignIn = () => {
         },
         { withCredentials: true }
       );
-      // console.log(data);
       if (data && data.success) {
         dispatch(addUser(data.data.userDetails));
         navigate("/");

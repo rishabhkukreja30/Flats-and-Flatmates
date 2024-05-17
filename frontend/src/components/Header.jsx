@@ -25,10 +25,9 @@ const Header = () => {
         `${import.meta.env.VITE_BACKEND_URL}/users/current-user`,
         { withCredentials: true }
       );
-      console.log(data);
       if (data && data.success) {
         dispatch(addUser(data.data));
-        navigate("/");
+        // navigate("/");
       }
     } catch (error) {
       console.error(error);
@@ -69,7 +68,6 @@ const Header = () => {
         {}, // passing empty object as second argument in post request is data
         { withCredentials: true }
       );
-      console.log(data);
       if (data && data.success) {
         dispatch(removeUser());
         navigate("/signin");

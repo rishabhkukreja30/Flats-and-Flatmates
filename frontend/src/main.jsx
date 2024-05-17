@@ -46,14 +46,6 @@ const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: "/listings",
-        element: (
-          <AuthLayout>
-            <WishList />
-          </AuthLayout>
-        ),
-      },
-      {
         path: "/flats",
         element: <FlatsListing />,
       },
@@ -63,7 +55,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/flats/postflat",
-        element: <PostFlat />,
+        element: (
+          <AuthLayout path={"/flats/postflat"}>
+            <PostFlat />
+          </AuthLayout>
+        ),
       },
     ],
   },
