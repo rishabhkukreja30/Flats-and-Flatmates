@@ -49,6 +49,10 @@ const flatSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    postedByName: {
+      type: String,
+      required: true,
+    },
     deposit: {
       type: Number,
       required: true,

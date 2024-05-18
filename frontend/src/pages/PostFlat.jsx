@@ -64,7 +64,7 @@ const PostFlat = () => {
         } else {
           formData.append(key, flatData[key]);
         }
-        console.log(key, flatData[key]);
+        // console.log(key, flatData[key]);
       }
 
       const { data } = await axios.post(
@@ -214,23 +214,28 @@ const PostFlat = () => {
               { value: "none", label: "Unfurnished" },
             ]}
           />
-          <h1 className="w-full pl-14 text-xl">Available From</h1>
           <div className="relative w-4/5 m-4">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <FontAwesomeIcon
-                icon={faCalendarAlt}
-                className="text-indigo-700"
+            <label className="block mb-4 text-white text-xl">
+              Available From
+            </label>
+            <div className="relative flex items-center">
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <FontAwesomeIcon
+                  icon={faCalendarAlt}
+                  className="text-indigo-700"
+                />
+              </div>
+              <input
+                placeholder="Available From"
+                name="availableFrom"
+                type="date"
+                value={flatData.availableFrom}
+                onChange={handleChange}
+                className="pl-10 w-full py-4 pr-3 text-white bg-gray-900 border-2 border-white rounded-lg"
               />
             </div>
-            <input
-              placeholder="Available From"
-              name="availableFrom"
-              type="date"
-              value={flatData.availableFrom}
-              onChange={handleChange}
-              className="pl-10 w-full py-4 pr-3 text-white bg-gray-900 border-2 border-white rounded-lg"
-            />
           </div>
+
           <div className="relative w-4/5 m-2">
             <label className="block mb-4 text-white text-xl">Flat Images</label>
             <input

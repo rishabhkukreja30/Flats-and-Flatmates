@@ -56,6 +56,7 @@ const addFlatListing = asyncHandler(async (req, res) => {
     preference,
     availableFrom,
     postedBy: req.user._id,
+    postedByName: req.user.fullName,
     deposit,
     furnishing,
     flatImages,
