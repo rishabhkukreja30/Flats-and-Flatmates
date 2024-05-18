@@ -6,6 +6,7 @@ const Input = ({
   type = "text",
   icon,
   inputRef,
+  onChange,
   className = "",
   ...props
 }) => {
@@ -18,6 +19,7 @@ const Input = ({
         placeholder={placeholder}
         ref={inputRef}
         type={type}
+        onChange={onChange}
         className="pl-10 w-full py-4 pr-3 text-white bg-gray-900 border-2 border-white rounded-lg"
         {...props}
       />

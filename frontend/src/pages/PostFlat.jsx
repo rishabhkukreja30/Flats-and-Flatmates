@@ -5,12 +5,16 @@ import {
   faCity,
   faMapMarkerAlt,
   faCalendarAlt,
+  faPerson,
+  faNoteSticky,
+  faCouch,
 } from "@fortawesome/free-solid-svg-icons";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import Button from "../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 const PostFlat = () => {
   const initialState = {
@@ -30,6 +34,8 @@ const PostFlat = () => {
   };
 
   const [flatData, setFlatData] = useState(initialState);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -45,11 +51,44 @@ const PostFlat = () => {
       }));
     }
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log(flatData);
+    // console.log(flatData);
+    try {
+      const formData = new FormData();
+      for (const key in flatData) {
+        if (key === "flatImages") {
+          Array.from(flatData.flatImages).forEach((file) => {
+            formData.append("flatImages", file);
+          });
+        } else {
+          formData.append(key, flatData[key]);
+        }
+        console.log(key, flatData[key]);
+      }
+
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/flats`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (data && data.success) {
+        navigate("/listings");
+      } else {
+        setErrorMessage("Something went wrong while posting the flat");
+        setFlatData(initialState);
+      }
+    } catch (error) {
+      setErrorMessage("Something went wrong while posting the flat");
+      setFlatData(initialState);
+      console.error("Error posting flat data:", error);
+    }
   };
 
   const handleReset = () => {
@@ -74,18 +113,18 @@ const PostFlat = () => {
             name="title"
             value={flatData.title}
             onChange={handleChange}
-            icon={faHome}
+            icon={faNoteSticky}
           />
           <Input
             placeholder="Description"
             name="description"
             value={flatData.description}
             onChange={handleChange}
-            icon={faHome}
+            icon={faNoteSticky}
           />
 
           <Select
-            placeholder="Select Flat Type"
+            placeholder="Flat Type"
             name="flatType"
             value={flatData.flatType}
             onChange={handleChange}
@@ -97,20 +136,25 @@ const PostFlat = () => {
               { value: "4BHK+", label: "4BHK+" },
             ]}
           />
-
-          <Input
+          <Select
             placeholder="City"
             name="city"
             value={flatData.city}
             onChange={handleChange}
             icon={faCity}
+            options={[
+              { value: "Bengaluru", label: "Bengaluru" },
+              { value: "Hyderabad", label: "Hyderabad" },
+              { value: "Gurugram", label: "Gurugram" },
+              { value: "Noida", label: "Noida" },
+            ]}
           />
           <Input
             placeholder="Area"
             name="area"
             value={flatData.area}
             onChange={handleChange}
-            icon={faMapMarkerAlt}
+            icon={faCity}
           />
           <Input
             placeholder="Location"
@@ -141,11 +185,33 @@ const PostFlat = () => {
             name="preference"
             value={flatData.preference}
             onChange={handleChange}
-            icon={faHome}
+            icon={faPerson}
             options={[
-              { value: "male", label: "Male" },
-              { value: "female", label: "Female" },
-              { value: "anyone", label: "Anyone" },
+              { value: "Male", label: "Male" },
+              { value: "Female", label: "Female" },
+              { value: "Anyone", label: "Anyone" },
+            ]}
+          />
+
+          <Input
+            placeholder="Deposit"
+            name="deposit"
+            type="number"
+            value={flatData.deposit}
+            onChange={handleChange}
+            icon={faIndianRupeeSign}
+          />
+
+          <Select
+            placeholder="Select Furnishing"
+            name="furnishing"
+            value={flatData.furnishing}
+            onChange={handleChange}
+            icon={faCouch}
+            options={[
+              { value: "full", label: "Fully Furnished" },
+              { value: "semi", label: "Semi Furnished" },
+              { value: "none", label: "Unfurnished" },
             ]}
           />
           <h1 className="w-full pl-14 text-xl">Available From</h1>
@@ -165,39 +231,18 @@ const PostFlat = () => {
               className="pl-10 w-full py-4 pr-3 text-white bg-gray-900 border-2 border-white rounded-lg"
             />
           </div>
-
-          <Input
-            placeholder="Deposit"
-            name="deposit"
-            type="number"
-            value={flatData.deposit}
-            onChange={handleChange}
-            icon={faIndianRupeeSign}
-          />
-
-          <Select
-            placeholder="Select Furnishing"
-            name="furnishing"
-            value={flatData.furnishing}
-            onChange={handleChange}
-            icon={faHome}
-            options={[
-              { value: "full", label: "Fully Furnished" },
-              { value: "semi", label: "Semi Furnished" },
-              { value: "none", label: "Unfurnished" },
-            ]}
-          />
-
-          <div className="relative w-4/5 m-4">
-            <label className="block mb-2 text-white text-xl">Flat Images</label>
+          <div className="relative w-4/5 m-2">
+            <label className="block mb-4 text-white text-xl">Flat Images</label>
             <input
               type="file"
               name="flatImages"
               multiple
               onChange={handleChange}
+              accept="image/*"
               className="w-full p-4 text-white bg-gray-900 border-2 border-white rounded-lg"
             />
           </div>
+          <p className="text-red-500 font-mdium text-xl">{errorMessage}</p>
           <div className="flex justify-center">
             <Button children={"Reset"} className="mt-4" onClick={handleReset} />
             <Button children={"Post Flat"} className="mt-4" type="submit" />

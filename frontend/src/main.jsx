@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import store from "./store/store.js";
 import SignUp from "./pages/SignUp.jsx";
 import AuthLayout from "./components/AuthLayout.jsx";
+import Listings from "./pages/Listings.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -42,6 +43,14 @@ const appRouter = createBrowserRouter([
         element: (
           <AuthLayout path={"/wishlist"}>
             <WishList />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/listings",
+        element: (
+          <AuthLayout path={"/listings"}>
+            <Listings />
           </AuthLayout>
         ),
       },

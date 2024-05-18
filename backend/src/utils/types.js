@@ -24,11 +24,11 @@ const flatListing = zod.object({
   city: zod.string().min(1),
   area: zod.string().min(1),
   location: zod.string().min(1),
-  roomRent: zod.string(), // update to number later
-  flatRent: zod.string(), // update to number later
-  preferance: zod.enum(["Male", "Female", "None"]),
-  availableFrom: zod.string(),
-  deposit: zod.string(),
+  roomRent: zod.number(), // update to number later
+  flatRent: zod.number(), // update to number later
+  preferance: zod.enum(["Male", "Female", "Anyone"]),
+  availableFrom: zod.date().optional(),
+  deposit: zod.number(),
   furnishing: zod.string(),
   flatImages: zod.array(zod.string()).optional(),
 });

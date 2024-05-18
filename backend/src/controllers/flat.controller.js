@@ -18,18 +18,18 @@ const addFlatListing = asyncHandler(async (req, res) => {
     location,
     roomRent,
     flatRent,
-    preferance,
+    preference,
     availableFrom,
     deposit,
     furnishing,
   } = req.body;
   // validate the inputs
-  const { success } = flatListing.safeParse(req.body);
-  if (!success) {
-    throw new ApiError(400, "Please provide necessary flat details");
-  }
+  // const { success } = flatListing.safeParse(req.body);
+  // if (!success) {
+  //   throw new ApiError(400, "Please provide necessary flat details");
+  // }
 
-  // console.log(req.files);
+  // console.log("req.files" + req.files);
 
   // check for flatImages and store them in flat images arrray
   const flatImages = [];
@@ -53,7 +53,7 @@ const addFlatListing = asyncHandler(async (req, res) => {
     location,
     roomRent,
     flatRent,
-    preferance,
+    preference,
     availableFrom,
     postedBy: req.user._id,
     deposit,

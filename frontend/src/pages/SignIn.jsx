@@ -15,7 +15,6 @@ const SignIn = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loginStatus = useSelector((state) => state.user.status);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
