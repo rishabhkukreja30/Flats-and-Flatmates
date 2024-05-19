@@ -53,6 +53,10 @@ const flatSchema = new Schema(
       type: String,
       required: true,
     },
+    contact: {
+      type: Number,
+      required: true,
+    },
     deposit: {
       type: Number,
       required: true,
