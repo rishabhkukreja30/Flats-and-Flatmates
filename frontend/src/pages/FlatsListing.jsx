@@ -4,11 +4,11 @@ import { flats } from "../FlatData";
 import FilterBox from "../components/FilterBox";
 import useGetFlats from "../hooks/useGetFlats";
 import { useSelector } from "react-redux";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const FlatsListing = () => {
   useGetFlats();
   const flats = useSelector((state) => state.flats?.flatData);
-  // console.log(flats);
 
   return !flats ? (
     <div>Loading ...</div>
@@ -17,7 +17,7 @@ const FlatsListing = () => {
       <FilterBox />
       <div className="md:w-9/12 md:ml-10">
         {flats?.map((flat) => (
-          <FlatCard key={flat._id} flat={flat} />
+          <FlatCard key={flat._id} flat={flat} icon={[faHeart]} />
         ))}
       </div>
     </div>

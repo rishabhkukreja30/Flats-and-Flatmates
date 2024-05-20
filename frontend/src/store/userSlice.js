@@ -11,7 +11,7 @@ const userSlice = createSlice({
   reducers: {
     addUser: (state, action) => {
       state.status = true;
-      state.userData = action.payload.userDetails;
+      state.userData = action.payload;
     },
     removeUser: (state) => {
       state.status = false;

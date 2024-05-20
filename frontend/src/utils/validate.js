@@ -32,5 +32,5 @@ export const checkSignupData = (
   if (!isUserNameValid) return "Username should be at least 5 characters long";
   if (!isPhoneNumberValid) return "Phone Number should contain 10 digits";
   if (!isConfirmPasswordValid)
-    return "Password and comfitm Password do not match";
+    return "Password and Confirm Password do not match";
 };
