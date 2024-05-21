@@ -9,9 +9,14 @@ const flatsSlice = createSlice({
     getFlats: (state, action) => {
       state.flatData = action.payload;
     },
+    deleteFlat: (state, action) => {
+      state.flatData = state.flatData?.filter(
+        (flat) => flat._id !== action.payload
+      );
+    },
   },
 });
 
-export const { getFlats } = flatsSlice.actions;
+export const { getFlats, deleteFlat } = flatsSlice.actions;
 
 export default flatsSlice.reducer;

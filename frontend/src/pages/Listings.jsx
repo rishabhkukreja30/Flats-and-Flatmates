@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import FlatCard from "../components/FlatCard";
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import ListedFlat from "../components/ListedFlat";
 
 const Listings = () => {
   const { listings } = useSelector((state) => state.user.userData);
@@ -9,10 +8,12 @@ const Listings = () => {
   const flatsListedByUser = flats.filter((flat) => listings.includes(flat._id));
   console.log(flatsListedByUser);
 
-  return (
+  return !flatsListedByUser ? (
+    <div className="text-3xl text-center">No Flats Listed</div>
+  ) : (
     <div className="text-white bg-slate-900 p-10 flex flex-wrap justify-center">
       {flatsListedByUser.map((flat) => (
-        <FlatCard key={flat._id} flat={flat} icon={[faTrash, faEdit]} />
+        <ListedFlat key={flat._id} flat={flat} />
       ))}
     </div>
   );
