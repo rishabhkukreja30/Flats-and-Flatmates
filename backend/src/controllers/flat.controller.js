@@ -97,6 +97,12 @@ const deleteFlat = asyncHandler(async (req, res) => {
   if (!flat) {
     throw new ApiError(500, "Cannot delete this flat");
   }
+
+  // const { listings } = req.user;
+  await User.findByIdAndUpdate(req.user._id, {
+    $pull: { listings: req.params.id },
+  });
+
   return res
     .status(200)
     .json(new ApiResponse(200, {}, "Flat deleted succesfully"));

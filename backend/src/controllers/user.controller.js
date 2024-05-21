@@ -10,9 +10,7 @@ const registerUser = asyncHandler(async (req, res) => {
   //validate the inputs
   const { success } = registerBody.safeParse(req.body);
   if (!success) {
-    return res
-      .status(200)
-      .json(new ApiResponse(400, {}, "Invalid Credentilas"));
+    throw new ApiError(400, "Invalid credentials");
   }
 
   //   check if user already exists
@@ -23,15 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (existingUser) {
-    return res
-      .status(200)
-      .json(
-        new ApiResponse(
-          400,
-          {},
-          "User with this email or username already exists"
-        )
-      );
+    throw new ApiError(400, "User with this email or username already exists");
   }
 
   // console.log(req.file.path);
@@ -56,11 +46,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const createdUser = await User.findById(user._id).select("-password");
 
   if (!createdUser) {
-    return res
-      .status(200)
-      .json(
-        new ApiResponse(500, {}, "Something went wrong while creating the user")
-      );
+    throw new ApiError(500, "Something went wrong while creating the user");
   }
 
   return res
@@ -72,9 +58,7 @@ const loginUser = asyncHandler(async (req, res) => {
   // take input from user in req.body
   const { success } = loginBody.safeParse(req.body);
   if (!success) {
-    return res
-      .status(200)
-      .json(new ApiResponse(400, {}, "Invalid Credentials"));
+    throw new ApiError(400, "Invalid credentials");
   }
 
   const { username, email, password } = req.body;
@@ -88,22 +72,14 @@ const loginUser = asyncHandler(async (req, res) => {
   });
 
   if (!user) {
-    return res
-      .status(200)
-      .json(
-        new ApiResponse(
-          400,
-          {},
-          "User with this email or username does not exist"
-        )
-      );
+    throw new ApiError(400, "User with this email or username does not exist");
   }
 
   const userDetails = await User.findById(user._id).select("-password");
 
   const isPasswordValid = await user.isPasswordCorrect(password);
   if (!isPasswordValid) {
-    return res.status(200).json(new ApiResponse(400, {}, "Incorrect Password"));
+    throw new ApiError(400, "Incorrect Password");
   }
 
   // generate the token and set the token in cookies
