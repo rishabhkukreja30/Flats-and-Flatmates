@@ -21,7 +21,6 @@ const FlatDetails = () => {
           <ImageGallery images={flat.flatImages} />
         </div>
         <div className="w-full md:w-1/2 bg-gray-950 m-4 ml-0 border-2 border-white p-4 rounded-lg shadow-lg shadow-indigo-700 md:border-l-0 overflow-auto">
-          <FontAwesomeIcon icon={faHeart} className="w-8 h-8 p-5 float-right" />
           <h1 className="text-center text-white font-bold text-2xl">
             {flat.title}
           </h1>

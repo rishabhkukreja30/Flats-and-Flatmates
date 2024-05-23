@@ -6,9 +6,8 @@ const Listings = () => {
   const { listings } = useSelector((state) => state.user.userData);
   const flats = useSelector((state) => state.flats.flatData);
   const flatsListedByUser = flats.filter((flat) => listings.includes(flat._id));
-  console.log(flatsListedByUser);
 
-  return !flatsListedByUser ? (
+  return flatsListedByUser.length === 0 ? (
     <div className="text-3xl text-center">No Flats Listed</div>
   ) : (
     <div className="text-white bg-slate-900 p-10 flex flex-wrap justify-center">

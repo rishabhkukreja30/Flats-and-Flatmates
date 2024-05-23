@@ -15,6 +15,9 @@ import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addFlat } from "../store/flatsSlice";
+import { addFlatToListings } from "../store/userSlice";
 
 const PostFlat = () => {
   const initialState = {
@@ -36,6 +39,7 @@ const PostFlat = () => {
   const [flatData, setFlatData] = useState(initialState);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -77,8 +81,10 @@ const PostFlat = () => {
           withCredentials: true,
         }
       );
-
+      console.log(data.data);
       if (data && data.success) {
+        dispatch(addFlat(data.data));
+        dispatch(addFlatToListings(data.data._id));
         navigate("/listings");
       } else {
         setErrorMessage("Something went wrong while posting the flat");

@@ -17,9 +17,22 @@ const userSlice = createSlice({
       state.status = false;
       state.userData = null;
     },
+    addFlatToListings: (state, action) => {
+      state.userData.listings.push(action.payload);
+    },
+    removeFlatFromListings: (state, action) => {
+      state.userData.listings = state.userData.listings.filter(
+        (listing) => listing !== action.payload
+      );
+    },
   },
 });
 
-export const { addUser, removeUser } = userSlice.actions;
+export const {
+  addUser,
+  removeUser,
+  addFlatToListings,
+  removeFlatFromListings,
+} = userSlice.actions;
 
 export default userSlice.reducer;

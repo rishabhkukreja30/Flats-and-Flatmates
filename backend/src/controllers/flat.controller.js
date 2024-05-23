@@ -69,7 +69,7 @@ const addFlatListing = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(201, {}, "Flat created succesfully"));
+    .json(new ApiResponse(201, flat, "Flat created succesfully"));
 });
 
 const getAllFlats = asyncHandler(async (req, res) => {

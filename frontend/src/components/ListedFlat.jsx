@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { deleteFlat } from "../store/flatsSlice";
+import { removeFlatFromListings } from "../store/userSlice";
 
 const ListedFlat = ({ flat }) => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const ListedFlat = ({ flat }) => {
       );
       if (data.success) {
         dispatch(deleteFlat(flat._id));
+        dispatch(removeFlatFromListings(flat._id));
       }
     } catch (error) {
       console.error(error);
