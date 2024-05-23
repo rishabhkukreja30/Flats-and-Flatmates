@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import FlatCard from "../components/FlatCard";
 import FilterBox from "../components/FilterBox";
-import useGetFlats from "../hooks/useGetFlats";
 import { useSelector } from "react-redux";
 
 const FlatsListing = () => {
-  useGetFlats();
   const flats = useSelector((state) => state.flats?.flatData);
 
   return !flats ? (

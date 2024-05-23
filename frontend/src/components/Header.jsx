@@ -5,8 +5,10 @@ import Button from "./Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, removeUser } from "../store/userSlice";
+import { removeUser } from "../store/userSlice";
 import axios from "axios";
+import useGetUser from "../hooks/useGetUser";
+import useGetFlats from "../hooks/useGetFlats";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State to track mobile menu open/close
@@ -19,24 +21,8 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const fetchUser = async () => {
-    try {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_BACKEND_URL}/users/current-user`,
-        { withCredentials: true }
-      );
-      if (data && data.success) {
-        dispatch(addUser(data.data));
-        // navigate("/");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  useGetUser();
+  useGetFlats();
 
   const navItems = [
     {
