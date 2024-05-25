@@ -145,4 +145,57 @@ const changePassword = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Password changes successfully"));
 });
 
-export { registerUser, loginUser, logoutUser, getCurrentUser };
+const addToWishlist = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const { flatId } = req.body;
+
+  const user = await User.findById(userId);
+
+  if (!user.wishList.includes(flatId)) {
+    user.wishList.push(flatId);
+    await user.save();
+  } else {
+    throw new ApiError(400, "This flat is already present in the wishlist");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, user.wishList, "Flat added to wishlist successfully")
+    );
+});
+
+const removeFromWishList = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const { flatId } = req.body;
+
+  const user = await User.findById(userId);
+
+  if (user.wishList.includes(flatId)) {
+    user.wishList = user.wishList.filter(
+      (flat_id) => flat_id.toString() !== flatId
+    );
+    await user.save();
+  } else {
+    throw new ApiError(400, "This flat is not present in the wishlist");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        user.wishList,
+        "Flat removed from wishlist successfully"
+      )
+    );
+});
+
+export {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getCurrentUser,
+  addToWishlist,
+  removeFromWishList,
+};
