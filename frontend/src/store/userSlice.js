@@ -25,6 +25,14 @@ const userSlice = createSlice({
         (listing) => listing !== action.payload
       );
     },
+    addToWishlist: (state, action) => {
+      state.userData.wishList.push(action.payload);
+    },
+    removeFromWishlist: (state, action) => {
+      state.userData.wishList = state.userData.wishList.filter(
+        (flatId) => flatId !== action.payload
+      );
+    },
   },
 });
 
@@ -33,6 +41,8 @@ export const {
   removeUser,
   addFlatToListings,
   removeFlatFromListings,
+  addToWishlist,
+  removeFromWishlist,
 } = userSlice.actions;
 
 export default userSlice.reducer;

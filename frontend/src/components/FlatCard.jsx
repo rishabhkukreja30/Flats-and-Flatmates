@@ -1,12 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "./Carousel";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist, removeFromWishlist } from "../store/userSlice";
 
 const FlatCard = ({ flat }) => {
-  const addToWishlist = () => {
-    console.log("add to wishlist");
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.user.userData.wishList);
+  const isInWishlist = wishlist.includes(flat._id);
+  const [inWishlist, setInWishlist] = useState(isInWishlist);
+
+  const toggleWishlist = async () => {
+    try {
+      if (inWishlist) {
+        // remove from wishlist
+        const { data } = await axios.delete(
+          `${import.meta.env.VITE_BACKEND_URL}/users/wishlist`,
+          { data: { flatId: flat._id }, withCredentials: true }
+        );
+
+        if (data.success) {
+          setInWishlist(false);
+          dispatch(removeFromWishlist(flat._id));
+        } else {
+          console.error("Failed to remove from wishlist");
+        }
+      } else {
+        // add to wiishlist
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/users/wishlist`,
+          {
+            flatId: flat._id,
+          },
+          { withCredentials: true }
+        );
+
+        if (data.success) {
+          setInWishlist(true);
+          dispatch(addToWishlist(flat._id));
+        } else {
+          console.error("Failed to add to wishlist");
+        }
+      }
+    } catch (error) {
+      console.error("Failed to toggle wishlist ", error);
+    }
   };
 
   return (
@@ -18,8 +59,11 @@ const FlatCard = ({ flat }) => {
       </div>
       <div className="px-5 w-full md:w-1/2 text-center">
         {/* <FontAwesomeIcon icon={faHeart} className="w-8 h-8 p-5 float-right" /> */}
-        <button onClick={addToWishlist} className="m-4 float-right">
-          <FontAwesomeIcon icon={faHeart} className="w-8 h-8" />
+        <button onClick={toggleWishlist} className="m-4 float-right">
+          <FontAwesomeIcon
+            icon={faHeart}
+            className={`w-8 h-8 ${inWishlist ? "text-red-500" : ""}`}
+          />
         </button>
         <h1 className="p-2 font-medium text-3xl">{flat.title}</h1>
         <h2 className="p-2 text-gray-400 font-medium">{flat.description}</h2>

@@ -9,12 +9,14 @@ const WishList = () => {
   const flatsWishlistedByUser = flats.filter((flat) =>
     wishList.includes(flat._id)
   );
-  console.log(flatsWishlistedByUser);
+  // console.log(flatsWishlistedByUser);
 
-  return (
+  return !flatsWishlistedByUser.length ? (
+    <div className="3xl text-center">No Flats In Wishlist</div>
+  ) : (
     <div className="text-white bg-slate-900 p-10 flex flex-wrap justify-center">
       {flatsWishlistedByUser.map((flat) => (
-        <FlatCard key={flat._id} flat={flat} icon={[faHeart]} />
+        <FlatCard key={flat._id} flat={flat} />
       ))}
     </div>
   );
