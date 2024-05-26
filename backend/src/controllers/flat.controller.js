@@ -110,20 +110,32 @@ const deleteFlat = asyncHandler(async (req, res) => {
 
 // search flats
 const searchFlats = asyncHandler(async (req, res) => {
-  const { city, area, flatType } = req.query;
+  const {
+    city,
+    flatRentRange,
+    flatType,
+    preference,
+    availability,
+    furnishing,
+  } = req.query;
   // Build the query object based on the provided search parameters
   const query = {};
 
+  console.log(typeof parseInt(flatRentRange));
+
   if (city) query.city = city;
-  if (area) query.area = area;
+  if (flatRentRange) query.flatRent = { $lte: parseInt(flatRentRange) };
   if (flatType) query.flatType = flatType;
+  if (preference) query.preference = preference;
+  if (furnishing) query.furnishing = furnishing;
 
   const flats = await Flat.find(query);
   if (!flats) {
     throw new ApiError(500, "Something went wrong while retrieving the flats");
   }
+
   if (flats.length === 0) {
-    return res.status(200).json(new ApiResponse(200, {}, "No flats found"));
+    res.status(200).json(new ApiResponse(200, {}, "No Flats Found"));
   }
 
   return res

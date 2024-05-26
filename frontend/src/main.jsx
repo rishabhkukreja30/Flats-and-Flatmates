@@ -15,7 +15,6 @@ import store from "./store/store.js";
 import SignUp from "./pages/SignUp.jsx";
 import AuthLayout from "./components/AuthLayout.jsx";
 import Listings from "./pages/Listings.jsx";
-import Shimmer from "./components/Shimmer.jsx";
 
 const appRouter = createBrowserRouter([
   {

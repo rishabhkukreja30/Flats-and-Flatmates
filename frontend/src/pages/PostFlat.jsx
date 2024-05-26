@@ -196,6 +196,7 @@ const PostFlat = () => {
               { value: "Male", label: "Male" },
               { value: "Female", label: "Female" },
               { value: "Anyone", label: "Anyone" },
+              { value: "Family", label: "Family" },
             ]}
           />
 

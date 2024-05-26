@@ -38,7 +38,7 @@ const flatSchema = new Schema(
     },
     preference: {
       type: String,
-      enum: ["Male", "Female", "Anyone"],
+      enum: ["Male", "Female", "Anyone", "Family"],
       required: true,
     },
     availableFrom: {
