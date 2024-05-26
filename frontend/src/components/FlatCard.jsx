@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import Carousel from "./Carousel";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, removeFromWishlist } from "../store/userSlice";
 
 const FlatCard = ({ flat }) => {
   const dispatch = useDispatch();
-  const wishlist = useSelector((state) => state.user.userData.wishList);
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.user.userData);
+  const wishlist = userData ? userData.wishList : [];
   const isInWishlist = wishlist.includes(flat._id);
   const [inWishlist, setInWishlist] = useState(isInWishlist);
 
   const toggleWishlist = async () => {
+    if (!userData) {
+      navigate("/signin");
+      return;
+    }
+
     try {
       if (inWishlist) {
         // remove from wishlist

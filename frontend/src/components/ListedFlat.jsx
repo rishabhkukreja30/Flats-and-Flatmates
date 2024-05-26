@@ -39,12 +39,12 @@ const ListedFlat = ({ flat }) => {
       </div>
       <div className="px-5 w-full md:w-1/2 text-center">
         <div className="absolute top-2 right-2 flex ">
-          <button
+          {/* <button
             to={`/edit-flat/${flat._id}`}
             className="text-blue-500 hover:text-blue-700 m-4"
           >
             <FontAwesomeIcon icon={faEdit} className="w-8 h-8" />
-          </button>
+          </button> */}
           <button
             onClick={handleDelete}
             className="text-red-500 hover:text-red-700 m-4"

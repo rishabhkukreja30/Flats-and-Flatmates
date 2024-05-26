@@ -4,6 +4,7 @@ import { faHeart, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Shimmer from "../components/Shimmer";
 
 const FlatDetails = () => {
   const { id } = useParams();
@@ -13,7 +14,7 @@ const FlatDetails = () => {
   // console.log(flat);
 
   return !flat ? (
-    <div>Loading ...</div>
+    <Shimmer />
   ) : (
     <div>
       <div className="bg-slate-900 p-10 flex flex-col md:flex-row text-white">

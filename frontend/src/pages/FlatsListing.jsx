@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import FlatCard from "../components/FlatCard";
 import FilterBox from "../components/FilterBox";
 import { useSelector } from "react-redux";
+import Shimmer from "../components/Shimmer";
 
 const FlatsListing = () => {
   const flats = useSelector((state) => state.flats?.flatData);
 
   return !flats ? (
-    <div>Loading ...</div>
+    <Shimmer />
   ) : (
     <div className="bg-slate-900 p-10 md:flex-row justify-center flex flex-col">
       <FilterBox />
