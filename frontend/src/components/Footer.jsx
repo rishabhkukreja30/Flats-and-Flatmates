@@ -6,10 +6,13 @@ const Footer = () => {
   return (
     <footer className="bg-gray-950 text-white py-8">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between">
+        <div className="flex flex-col md:flex-row items-center  justify-center md:justify-between">
           <div className="mb-4 md:mb-0 text-center">
             <h3 className="text-lg font-semibold">Flats N Flatmates</h3>
-            <p className="text-sm">A brief description of the company.</p>
+            <p className="text-sm ">
+              We offer a wide range of flats with various amenities to suit your
+              needs.
+            </p>
           </div>
           <div className="mb-4 md:mb-0 text-center">
             <h4 className="text-lg font-semibold mb-2">Links</h4>

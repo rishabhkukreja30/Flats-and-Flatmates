@@ -64,10 +64,12 @@ export const filterFlats = (flats, filters) => {
     }
 
     // Filter by preferred tenants
+    const selectedPreferences = Object.keys(filters.tenants).filter(
+      (tenant) => filters.tenants[tenant]
+    );
     if (
-      Object.keys(filters.tenants).some(
-        (tenant) => filters.tenants[tenant] && flat.preference !== tenant
-      )
+      selectedPreferences.length > 0 &&
+      !selectedPreferences.includes(flat.preference)
     ) {
       return false;
     }
