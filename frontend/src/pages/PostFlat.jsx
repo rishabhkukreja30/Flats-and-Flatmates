@@ -194,6 +194,7 @@ const PostFlat = () => {
             options={[
               { value: "Male", label: "Male" },
               { value: "Female", label: "Female" },
+              { value: "Family", label: "Family" },
               { value: "Anyone", label: "Anyone" },
             ]}
           />

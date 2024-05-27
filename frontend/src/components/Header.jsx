@@ -41,7 +41,7 @@ const Header = () => {
       active: loginStatus,
     },
     {
-      name: "Your Listings",
+      name: "My Properties",
       url: "/listings",
       active: loginStatus,
     },
