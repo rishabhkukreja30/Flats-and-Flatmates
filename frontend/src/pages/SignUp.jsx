@@ -36,7 +36,7 @@ const SignUp = () => {
 
     if (message) return;
 
-    // send backend request to /login to sign in he user
+    // send backend request to /login to sign up the user
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/users/register`,
@@ -49,8 +49,7 @@ const SignUp = () => {
         }
       );
       if (data && data.success) {
-        dispatch(addUser(data.data));
-        navigate("/");
+        navigate("/signin");
       } else if (data && !data.success) {
         setErrorMessage(data.message);
       }

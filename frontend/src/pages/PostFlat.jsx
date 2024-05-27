@@ -57,7 +57,7 @@ const PostFlat = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(flatData);
+
     try {
       const formData = new FormData();
       for (const key in flatData) {
@@ -68,7 +68,6 @@ const PostFlat = () => {
         } else {
           formData.append(key, flatData[key]);
         }
-        // console.log(key, flatData[key]);
       }
 
       const { data } = await axios.post(
@@ -81,7 +80,7 @@ const PostFlat = () => {
           withCredentials: true,
         }
       );
-      console.log(data.data);
+
       if (data && data.success) {
         dispatch(addFlat(data.data));
         dispatch(addFlatToListings(data.data._id));
@@ -196,7 +195,6 @@ const PostFlat = () => {
               { value: "Male", label: "Male" },
               { value: "Female", label: "Female" },
               { value: "Anyone", label: "Anyone" },
-              { value: "Family", label: "Family" },
             ]}
           />
 
