@@ -64,7 +64,7 @@ const FlatCard = ({ flat }) => {
           <Carousel flatImages={flat.flatImages} />
         </Link>
       </div>
-      <div className="px-5 w-full md:w-1/2 text-center">
+      <div className="md:px-5 w-full md:w-1/2  text-center">
         {/* <FontAwesomeIcon icon={faHeart} className="w-8 h-8 p-5 float-right" /> */}
         <button onClick={toggleWishlist} className="m-4 float-right">
           <FontAwesomeIcon
