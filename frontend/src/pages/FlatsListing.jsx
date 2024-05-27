@@ -8,11 +8,8 @@ import { filterFlats } from "../utils/filterFlats";
 const FlatsListing = () => {
   const flats = useSelector((state) => state.flats?.flatData);
   const filters = useSelector((state) => state.filters);
-  // console.log(flats);
-  // console.log(filters);
 
   const filteredFlats = filterFlats(flats, filters);
-  // console.log(filteredFlats);
 
   return !flats ? (
     <Shimmer />

@@ -11,7 +11,6 @@ const WishList = () => {
   const flatsWishlistedByUser = flats.filter((flat) =>
     wishList.includes(flat._id)
   );
-  // console.log(flatsWishlistedByUser);
 
   return !flatsWishlistedByUser.length ? (
     <div className=" text-center text-white bg-slate-900 p-10">

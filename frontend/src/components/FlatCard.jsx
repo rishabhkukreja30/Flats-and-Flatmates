@@ -103,7 +103,6 @@ const FlatCard = ({ flat }) => {
           </div>
         </div>
       </div>
-      {/* </Link> */}
     </div>
   );
 };

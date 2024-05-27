@@ -3,7 +3,6 @@ import { Flat } from "../models/flat.model.js";
 import { ApiError } from "../utils/ApiErrror.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
-import { flatListing } from "../utils/types.js";
 import { asyncHandler } from "../utils/asyncHnadler.js";
 import { User } from "../models/user.model.js";
 
