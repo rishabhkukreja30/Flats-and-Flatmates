@@ -8,7 +8,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://flats-and-flatmates.vercel.app/",
+      "https://flats-and-flatmates.vercel.app",
     ],
     credentials: true,
   })
