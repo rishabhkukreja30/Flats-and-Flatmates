@@ -88,8 +88,8 @@ const loginUser = asyncHandler(async (req, res) => {
   // make sure cookies can only be edited by th server and not the browser
   const options = {
     httpOnly: true,
-    secure: false,
-    sameSite: "None",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
   };
 
   return res
